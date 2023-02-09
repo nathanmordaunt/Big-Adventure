@@ -1,0 +1,1 @@
+{"level":0,"player":{"name":null,"hp":10,"dmg":0,"items":null},"enemy":{"name":null,"hp":12,"dmg":0,"items":null}}
