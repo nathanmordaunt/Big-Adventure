@@ -1,36 +1,37 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net7.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net7.0": []
   },
   "packageFolders": {
-    "/home/runner/.nuget/packages/": {}
+    "C:\\Users\\Drumr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/runner/Big-Adventure/main.csproj",
-      "projectName": "main",
-      "projectPath": "/home/runner/Big-Adventure/main.csproj",
-      "packagesPath": "/home/runner/.nuget/packages/",
-      "outputPath": "/home/runner/Big-Adventure/obj/",
+      "projectUniqueName": "c:\\Users\\Drumr\\Documents\\C# Projects\\Big Adventure\\ConsoleApp1.csproj",
+      "projectName": "ConsoleApp1",
+      "projectPath": "c:\\Users\\Drumr\\Documents\\C# Projects\\Big Adventure\\ConsoleApp1.csproj",
+      "packagesPath": "C:\\Users\\Drumr\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Drumr\\Documents\\C# Projects\\Big Adventure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/runner/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Drumr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp6.0"
+        "net7.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "netcoreapp6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -41,15 +42,16 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "netcoreapp6.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "imports": [
           "net461",
           "net462",
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -58,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/nix/store/jsm5am5i2b2izvwzbw5h6lk3plvpkrlw-dotnet-sdk-6.0.100/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

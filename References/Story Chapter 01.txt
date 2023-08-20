@@ -1,0 +1,43 @@
+...CHAPTER ONE...
+
+A sublte breeze whisps passed your face
+You awaken to find yourself washed up upon a sandy beach
+Wooden beams and ripped sails can be seen washed up along the coast
+As you drag yourself out of the water, you stumble falling unto the warm sand
+
+You sit up, gain your bearings. As you do you notice a body in the distance and to your left.
+It is still and face down toward the ground. It seems lifeless...
+
+On your right you notice a shipwreck where there may be useful equitment and possibly other survivors
+
+Behind you lay thick brush and trees. It seems to be some kind of forrest.
+You can barely see into it. 
+It seems strange to see such a thick wall of trees backing driectly on to a beach.
+
+What do you do?
+
+1: walk up to inspect the body
+2: leave the body alone for now and inspect the shipwreck.
+3: head directly into the forrest behind you. The beach seems dangerous and you feel it wise to move on quickly. After all, whatever happened out at sea may have followed you here.
+
+***need to branch the story and build context for different player classes (paladin, mage and rogue)***
+
+
+1 INSPECT THE BODY{
+
+
+
+}
+
+
+
+2 INSPECT SHIPWRECK{
+
+
+}
+
+
+3 FLEE INTO THE FORREST{
+
+
+}
