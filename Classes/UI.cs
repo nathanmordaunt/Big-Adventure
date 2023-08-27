@@ -21,7 +21,7 @@ internal class UI
 
         Console.WriteLine();
         Console.WriteLine("**************************************");
-        Console.WriteLine("      ...Order From Chaos...");
+        Console.WriteLine("        ...A Sacred Moon...");
         Console.WriteLine("**************************************");
     }
 
@@ -296,7 +296,7 @@ internal class UI
 
     }
 
-    public void CommonHandUI(string input, Player p, int[] pd, int[] nd, int turn)
+    public void CommonHandUI(string input, Player p, int[] pd, int[] nd, int turn, int pool)
     {
 
         switch (input)
@@ -343,8 +343,9 @@ internal class UI
 
                     Console.WriteLine();
                     Console.WriteLine("=============================");
-                    Console.WriteLine("          Liars Dice         ");
+                    Console.WriteLine("        Common Hand          ");
                     Console.WriteLine("Your Currency: $" + p.currency);
+                    Console.WriteLine("Total Pool: $" + pool);
                     Console.WriteLine("=============================");
 
                     Console.WriteLine();
@@ -365,7 +366,7 @@ internal class UI
 
                     return;
                 }
-           
+
         }
 
     }

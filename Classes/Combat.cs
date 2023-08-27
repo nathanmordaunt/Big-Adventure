@@ -1,4 +1,3 @@
-using System;
 
 enum Command
 {

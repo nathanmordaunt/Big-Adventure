@@ -20,7 +20,8 @@ internal class CommonHand
     public int round { get; set; }
     public int playerWin { get; set; }
     public int npcWin { get; set; }
-    public int prizePool { get; set; }
+    public int pool { get; set; }
+    public int bidTotal {get; set;}
     public int turn { get; set; }
     
     public bool gameOver = false;
@@ -30,8 +31,11 @@ internal class CommonHand
     public int[] nd = new int[5];
 
     //TODO Test Two Pair
+    //TODO add npc behaviour
+    //TODO add a 3 player anf 4 player Play() method
+    //Possibly use Play2(), Play3(), and Play4() as naming conventions and parse in appropriate number of npcs
 
-    public void Play(Player p, NPC n)
+    public void Play2(Player p, NPC n)
     {
         p.currency = 450;
 
@@ -43,7 +47,7 @@ internal class CommonHand
         {
             while (gameOver != true)
             {
-                ui.CommonHandUI("title", p, pd, nd, turn);
+                ui.CommonHandUI("title", p, pd, nd, turn, pool);
     
                 DisplayDice(turn);
                 Console.WriteLine();
@@ -81,6 +85,89 @@ internal class CommonHand
         }
     }
 
+    //Controls player input
+    public void Input(Player p)
+    {
+        string input = Console.ReadLine().ToLower();
+
+        switch (input)
+        {
+            case "roll":
+            case "rol":
+            case "ro":
+                if (hasRolled == true)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("You have rolled your hand already ");
+                    Console.WriteLine("Please try another action or leave the game and lose your bid ");
+                    Console.WriteLine();
+                    Console.ReadLine();
+                    return;
+                }
+                else
+                {
+                    hasRolled = true;
+                    
+                    pd = Roll();
+                    nd = Roll();
+
+                    turn += 1;
+                    return;
+                }
+
+            case "call":
+            case "cal":
+            case "ca":
+                CompareRoll(pd, nd,p);
+                gameOver = true;
+                return;
+
+            case "rules":
+            case "rul":
+            case "ru":
+                ui.CommonHandUI("rules", p, pd, nd, turn, pool);
+                return;
+
+            case "up bid":
+            case "up":
+            case "u":
+                UpBid(p.currency, p);
+                Console.ReadLine();
+                return;
+
+            case "menu":
+            case "men":
+            case "me":
+            case "m":
+                ui.Commands(p);
+                return;
+
+            case "fold":
+            case "fol":
+            case "fo":
+            case "f":
+                //TODO in 3 and 4 player games the game should continue until there is a winner
+                Console.WriteLine("You have folded");
+                Console.WriteLine("Your losses are $" + bidTotal);
+                p.currency -= bidTotal;
+                gameOver = true;
+                return;
+            
+        case "check":
+        case "chec":
+        case "che":
+        case "ch":
+            Check();            
+            return;
+            
+            default:
+                Console.WriteLine();
+                Console.WriteLine("Please enter a valid command ");
+                Console.ReadLine();
+                return;
+        }
+    }
+
     public int[] Roll()
     {
 
@@ -93,6 +180,47 @@ internal class CommonHand
         }
 
         return dice;
+    }
+
+     void UpBid(int currency, Player p)
+    {
+        //tests if player has started the game
+        if(!hasRolled){
+            Console.WriteLine();
+            Console.WriteLine("Can't bid until the game has started ");
+            Console.WriteLine("Roll dice to start the game ");            
+            return;
+        }
+        
+        int bid;
+        Console.WriteLine();
+        Console.WriteLine("Enter Bid: ");
+        string input = Console.ReadLine();
+        
+        //validates input
+        if(!int.TryParse(input, out bid)){
+            Console.WriteLine();
+            Console.WriteLine("Please enter a valid number ");
+            
+            return;    
+        }else{
+            bid = int.Parse(input);
+        }
+
+        if (currency >= bid)
+        {
+            p.currency -= bid;
+            pool += bid;
+            bidTotal += bid;
+            turn += 1;
+        }
+        else
+        {
+            Console.WriteLine();
+            Console.WriteLine("You do no have enough currency ");
+            Console.WriteLine("You can leave this round or offer a lower bid ");
+            Console.ReadLine();
+        }           
     }
 
     //compares dice to see which player has the higher hand
@@ -132,14 +260,14 @@ internal class CommonHand
     void win(Player p) {
         Console.WriteLine();
         Console.WriteLine("You win the round ");
-        prizePool += p.currency;
+        pool += p.currency;
     }
 
     // lose processes the lose condition.
     void lose(Player p) {
         Console.WriteLine();
         Console.WriteLine("Your opponent wins the round ");
-        prizePool -= p.currency;
+        pool -= p.currency;
     }
     
     // sorts dice from lowest to highest
@@ -159,23 +287,6 @@ internal class CommonHand
             }
         }
     }
-
-    // checks for consecutive dice rolls
-    //public int returnConsecutive(int[] dice)
-    //{
-    //    for (int i = 0; i < dice.Length; i++)
-    //    {
-    //        for (int j = i + 1; j < dice.Length; j++)
-    //        {
-    //            if (dice[i] == dice[j])
-    //            {
-    //                return dice[i];
-    //            }
-    //        }
-    //    }
-    //    return 0;
-    //}
-
 
     //checks if all five elements of the array are the same
     public bool FiveOfKind(int[] dice)
@@ -316,9 +427,6 @@ internal class CommonHand
         return false;
     }
 
-
-    //need to add two pair method beloew
-
     //checks for a set of two identical numbers
     public bool TwoOfKind(int[] dice)
     {
@@ -341,31 +449,6 @@ internal class CommonHand
             }
         }
         return false;
-    }
-
-    void UpBid(int currency, Player p)
-    {
-        Console.WriteLine();
-        Console.WriteLine("Enter Bid: ");
-        int bid = Console.Read();
-        Console.WriteLine(bid);
-
-        if (currency >= bid)
-        {
-            bid -= p.currency;
-        }
-        else
-        {
-            Console.WriteLine();
-            Console.WriteLine("You do no have enough currency ");
-            Console.WriteLine("You can leave this round or offer a lower bid ");
-            Console.ReadLine();
-        }
-    }
-
-    void Exit(bool gameOver)
-    {
-        gameOver = true;
     }
 
     //returns rank of a given roll
@@ -407,100 +490,17 @@ internal class CommonHand
         return rank;
     }
 
-    //Controls player input
-    public void Input(Player p)
-    {
-        string input = Console.ReadLine().ToLower();
+    
 
-        switch (input)
-        {
-            case "roll":
-            case "rol":
-            case "ro":
-                if (hasRolled == true)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("You have rolled your hand already ");
-                    Console.WriteLine("Please try another action or leave the game and lose your bid ");
-                    Console.WriteLine();
-                    Console.ReadLine();
-                    return;
-                }
-                else
-                {
-                    hasRolled = true;
-                    
-                    pd = Roll();
-                    nd = Roll();
-
-                    turn += 1;
-                    return;
-                }
-
-            case "call":
-            case "cal":
-            case "ca":
-            case "c":
-                CompareRoll(pd, nd,p);
-                gameOver = true;
-                return;
-
-            case "rules":
-            case "rul":
-            case "ru":
-                ui.CommonHandUI("rules", p, pd, nd, turn);
-                return;
-
-            case "up bid":
-            case "u":
-            case "up":
-                UpBid(p.currency, p);
-                Console.ReadLine();
-
-                turn += 1;
-                return;
-
-            case "menu":
-            case "men":
-            case "m":
-                ui.Commands(p);
-                return;
-
-            case "f":
-            case "fo":
-            case "fol":
-            case "fold":
-        
-                turn += 1;
-                return;
-            
-            case "leave":
-            case "l":
-                gameOver = true;
-                Console.WriteLine();
-                Console.WriteLine("You have left this game of Liars Dice ");
-                return;
-
-            default:
-                Console.WriteLine();
-                Console.WriteLine("Please enter a valid command ");
-                Console.ReadLine();
-                return;
+    void Check(){
+        if(hasRolled){
+            turn++;
+        }else{
+            Console.WriteLine();
+            Console.WriteLine("You need to start the game first ");
+            Console.WriteLine("Please roll the dice ");
+            Console.ReadLine();
         }
-    }
-
-    void Test(int[] dice)
-    {
-
-        pd = Roll();
-
-        Console.WriteLine();
-        DisplayDice(5);
-        Console.WriteLine();
-        Console.WriteLine(RankDice(pd));
-        Console.WriteLine();
-
-        DisplayDice(5);
     }
 
     void DisplayDice(int turn)

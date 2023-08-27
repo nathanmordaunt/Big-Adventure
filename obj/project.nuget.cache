@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LJDhTFmwodb9ZWzOu6j7FlaVF/20tzWb4OyO+0b267re0/ZDDu04NS1mDzoIABXw8aGXwR0ruk1hO1BtHhFeTA==",
+  "dgSpecHash": "65vR67Rq4WVnBl34zGB/Px7OLvku5MY6xEjoAGo4L4unGIoG3X8k43/seKUXTnxLXA5HMem7+HuoxC1zsZQc/w==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Drumr\\Documents\\C# Projects\\Big Adventure\\ConsoleApp1.csproj",
+  "projectFilePath": "/home/runner/Big-Adventure-Current/ConsoleApp1.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
