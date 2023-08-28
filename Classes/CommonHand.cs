@@ -69,11 +69,7 @@ internal class CommonHand
             
             if (input == "y")
             {
-                pd = new int[5];
-                nd = new int[5];
-                gameOver = false;
-                hasRolled = false;
-                turn = 0;
+                Reset();
                 continue;
             } else if (input == "n") 
             {
@@ -148,7 +144,7 @@ internal class CommonHand
             case "f":
                 //TODO in 3 and 4 player games the game should continue until there is a winner
                 Console.WriteLine("You have folded");
-                Console.WriteLine("Your losses are $" + bidTotal);
+                Console.WriteLine("Your losses this round are $" + bidTotal);
                 p.currency -= bidTotal;
                 gameOver = true;
                 return;
@@ -219,8 +215,18 @@ internal class CommonHand
             Console.WriteLine();
             Console.WriteLine("You do no have enough currency ");
             Console.WriteLine("You can leave this round or offer a lower bid ");
-            Console.ReadLine();
+            
         }           
+    }
+
+    public void Reset(){
+        pool = 0;
+        bidTotal = 0;
+        pd = new int[5];
+        nd = new int[5];
+        gameOver = false;
+        hasRolled = false;
+        turn = 0;
     }
 
     //compares dice to see which player has the higher hand
@@ -267,7 +273,8 @@ internal class CommonHand
     void lose(Player p) {
         Console.WriteLine();
         Console.WriteLine("Your opponent wins the round ");
-        pool -= p.currency;
+        //might minus loses after round as opposed to minusing bid from player currency
+        //pool -= p.currency;
     }
     
     // sorts dice from lowest to highest
