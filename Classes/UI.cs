@@ -353,14 +353,13 @@ internal class UI
 
                     Console.WriteLine("");
                     Console.WriteLine("=============================");
-                    Console.WriteLine("| (Ro)ll      (Ch)eck       |");
-                    Console.WriteLine("| (U)p bid    (Ca)ll        |");
-                    Console.WriteLine("| (F)old                    |");
+                    Console.WriteLine("| (Ro)ll      (C)heck       |");
+                    Console.WriteLine("| (U)p bid    (F)old        |");
                     Console.WriteLine("| (M)enu      (Ru)les       |");
                     Console.WriteLine("=============================");
 
                     // Roll starts the game by assigning ints to dice.
-                    // Check allows player to do nothing but still keep their cards. CANNOT Check if another player has up the bid
+                    // Check allows player to do nothing but still keep their dice. 
                     // Up bid prompts user to increase bid and call to match bet
                     // Fold allows player to forfeit the round losing their cards and bid
 

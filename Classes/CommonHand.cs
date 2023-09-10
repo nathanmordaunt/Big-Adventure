@@ -21,7 +21,9 @@ internal class CommonHand
     public int playerWin { get; set; }
     public int npcWin { get; set; }
     public int pool { get; set; }
-    public int bidTotal {get; set;}
+    public int bidTotalPlayer {get; set;}
+    public int bidTotalNPC01 {get; set;}
+    
     public int turn { get; set; }
     
     public bool gameOver = false;
@@ -35,7 +37,7 @@ internal class CommonHand
     //TODO add a 3 player anf 4 player Play() method
     //Possibly use Play2(), Play3(), and Play4() as naming conventions and parse in appropriate number of npcs
 
-    public void Play2(Player p, NPC n)
+    public void Play(Player p, NPC n)
     {
         p.currency = 450;
 
@@ -111,16 +113,10 @@ internal class CommonHand
                     return;
                 }
 
-            case "call":
-            case "cal":
-            case "ca":
-                CompareRoll(pd, nd,p);
-                gameOver = true;
-                return;
-
             case "rules":
             case "rul":
             case "ru":
+                //need to update rules to match common hand rules
                 ui.CommonHandUI("rules", p, pd, nd, turn, pool);
                 return;
 
@@ -128,7 +124,6 @@ internal class CommonHand
             case "up":
             case "u":
                 UpBid(p.currency, p);
-                Console.ReadLine();
                 return;
 
             case "menu":
@@ -144,8 +139,7 @@ internal class CommonHand
             case "f":
                 //TODO in 3 and 4 player games the game should continue until there is a winner
                 Console.WriteLine("You have folded");
-                Console.WriteLine("Your losses this round are $" + bidTotal);
-                p.currency -= bidTotal;
+                Console.WriteLine("Your losses this round are $" + bidTotalPlayer);
                 gameOver = true;
                 return;
             
@@ -153,6 +147,7 @@ internal class CommonHand
         case "chec":
         case "che":
         case "ch":
+        case "c":
             Check();            
             return;
             
@@ -184,9 +179,12 @@ internal class CommonHand
         if(!hasRolled){
             Console.WriteLine();
             Console.WriteLine("Can't bid until the game has started ");
-            Console.WriteLine("Roll dice to start the game ");            
+            Console.WriteLine("Roll dice to start the game ");  
+            Console.ReadLine();
             return;
         }
+
+        //need to add a check for other players bids
         
         int bid;
         Console.WriteLine();
@@ -197,6 +195,7 @@ internal class CommonHand
         if(!int.TryParse(input, out bid)){
             Console.WriteLine();
             Console.WriteLine("Please enter a valid number ");
+            Console.ReadLine();
             
             return;    
         }else{
@@ -207,7 +206,7 @@ internal class CommonHand
         {
             p.currency -= bid;
             pool += bid;
-            bidTotal += bid;
+            bidTotalPlayer += bid;
             turn += 1;
         }
         else
@@ -215,13 +214,14 @@ internal class CommonHand
             Console.WriteLine();
             Console.WriteLine("You do no have enough currency ");
             Console.WriteLine("You can leave this round or offer a lower bid ");
-            
+            Console.ReadLine();
         }           
     }
 
     public void Reset(){
         pool = 0;
-        bidTotal = 0;
+        bidTotalPlayer = 0;
+        bidTotalPlayer = 0;
         pd = new int[5];
         nd = new int[5];
         gameOver = false;
@@ -266,15 +266,15 @@ internal class CommonHand
     void win(Player p) {
         Console.WriteLine();
         Console.WriteLine("You win the round ");
+        Console.WriteLine("Your winngs are $" + pool);
         pool += p.currency;
     }
 
     // lose processes the lose condition.
     void lose(Player p) {
         Console.WriteLine();
-        Console.WriteLine("Your opponent wins the round ");
-        //might minus loses after round as opposed to minusing bid from player currency
-        //pool -= p.currency;
+        Console.WriteLine("You lose");
+        Console.WriteLine("Your losses are $" + bidTotalPlayer);
     }
     
     // sorts dice from lowest to highest

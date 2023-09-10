@@ -16,7 +16,7 @@ namespace BigAdventure // Note: actual namespace depends on the project name.
             UI ui= new UI();    
 
             //c.Update(p, n, ui);
-            ch.Play2(p,n);
+            ch.Play(p,n);
 
         }
     }

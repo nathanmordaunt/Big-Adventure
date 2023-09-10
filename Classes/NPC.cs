@@ -18,11 +18,18 @@ internal class NPC
     public int disableTick { get; set; }
     public int blindDuration { get; set; }
 
-    public enum Behaviors
+
+    public enum CombatBehaviors
     {
         Aggressive,
         Defensive,
         Cowardly,
+    }
+
+    public enum CHBehaviours{
+        Greedy,
+        Conservative,
+        WildCArd,
     }
 
     
@@ -139,27 +146,14 @@ internal class NPC
         {
             Attack(p);
         }
-
-
-
-        // TODO: use an enum to represent these variants, instead of a string. DONE
-
-        // switch (b)
-        // {
-        // case Behaviors.Aggressive:
-        //   {
-        //     Aggressive(p);
-        //     return;
-        //   }
-        // case Behaviors.Defensive:
-        // {
-        //   Defensive(p);
-        //   return;
-        // }
-        // case Behaviors.Cowardly:
-        // {
-        //   Cowardly(p);
-        //   return;
-        // }
     }
+
+    //create behaviour tree for common hand 
+    //use switch statement for to branch behaviour
+    public void CHBehaviour(int bidTotal,string behaviour){
+
+        
+    }
+
+    
 }
