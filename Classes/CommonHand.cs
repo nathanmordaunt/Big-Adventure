@@ -191,7 +191,7 @@ internal class CommonHand
         int bid;
         Console.WriteLine();
         Console.WriteLine("Enter Bid: ");
-        string input = Console.ReadLine();
+        string input = Console.ReadLine().ToLower();
         
         //validates input
         if(!int.TryParse(input, out bid)){
